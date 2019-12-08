@@ -1,49 +1,36 @@
-class Button {
-  float temp_y;
-  float temp_x;
-  float temp_height;
-  float temp_width;
+class Button_Class {
+  // CLASS VARIALBES
 
-  float y;
-  float x;
-  float h;
-  float w;
+  // SIZES AND COORDINATS
+  float X;
+  float Y;
+  float W;
+  float H;
 
-  boolean mouseHover;
-  boolean buttonClicked;
-  boolean nextpage;
+  // COLORS AND TRANSPARENCIES
+  int Color_1 = 255;
+  int Transparency = 126;
 
-
-  Button(float temp_x, float temp_y, float temp_width, float temp_height) {
-    y=temp_y;
-    x=temp_x;
-    h=temp_height;
-    w=temp_width;
+  // TEMPLATE
+  Button_Class(float Temp_X, float Temp_Y, float Temp_W, float Temp_H) {
+    X=Temp_X;
+    Y=Temp_Y;
+    W=Temp_W;
+    H=Temp_H;
   }
 
-  void display() {
+  // DISPLAY FUNCTION
+  void Display() {
     rectMode(CORNER);
-    rect(x, y, w, h);
+    fill(Color_1, Transparency);
+    rect(X, Y, W, H, 20);
   }
 
-  void mousehover() {
-    if (mouseX >= x && mouseX <= x+w && mouseY >= y && mouseY <= y+h) {
-      mouseHover =true;
-      rect(10,10,10,10);
-    }
-    else { 
-      mouseHover =false;
-      background(img);
-    }
-  }
-  
-  void clickable() {
-    if(mousePressed){
-      if(mouseHover){
-        print("clicked");
-        nextpage =true;
-       
-      }
+  // CLICKABLE FUNCTION
+  void Clickable_Fridge_Handle() {
+    if (mousePressed && mouseX >= X && mouseX <= X+W && mouseY >= Y && mouseY <= Y+H) {
+      Fridge_Handle_Clicked = true;
+      print("clicked");
     }
   }
 }
