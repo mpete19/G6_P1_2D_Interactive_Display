@@ -27,9 +27,32 @@ class Button_Class {
   }
 
   // CLICKABLE FUNCTION
-  void Clickable_Fridge_Handle() {
+  void Page_1() {
     if (mousePressed && mouseX >= X && mouseX <= X+W && mouseY >= Y && mouseY <= Y+H) {
-      Fridge_Handle_Clicked = true;
+      Page_0 = false;
+      Video = true;
+      print("clicked");
+      skiftTid = millis();
+    }
+  }
+  void Page_1_1() {
+    if (mousePressed && mouseX >= X && mouseX <= X+W && mouseY >= Y && mouseY <= Y+H) {
+      Page_1 = false;
+      Page_1_1 = true;
+      print("clicked");
+    }
+  }
+  void Page_1_2() {
+    if (mousePressed && mouseX >= X && mouseX <= X+W && mouseY >= Y && mouseY <= Y+H) {
+      Page_1_1 = false;
+      Page_1_2 = true;
+      print("clicked");
+    }
+  } 
+  void Page_1_3() {
+    if (mousePressed && mouseX >= X && mouseX <= X+W && mouseY >= Y && mouseY <= Y+H) {
+      Page_1_2 = false;
+      Page_1_3 = true;
       print("clicked");
     }
   }
