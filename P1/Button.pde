@@ -2,20 +2,25 @@ class Button_Class {
   // CLASS VARIALBES
 
   // SIZES AND COORDINATS
+  // Template  
   float X;
   float Y;
   float W;
   float H;
-  int Corners = 20;
+  // Rect specific
+  int Corners = 20; // Used to make curved edges
 
   // COLORS
+  // Template
   int Color;
+  // Other
+  int Color1 = 0; //Black
 
   // TRANSPARENCIES
   float Transparency = 150;
-  float Low_Transparency = 126;
-  float High_Transparency = 210;
-  float Change_Transparency = 1;
+  float Low_Transparency = 150;
+  float High_Transparency = 220;
+  float Change_Transparency = 4;
 
   // TEMPLATE
   Button_Class(float Temp_X, float Temp_Y, float Temp_W, float Temp_H, int Temp_Color) {
@@ -27,20 +32,34 @@ class Button_Class {
   }
 
   // DISPLAY FUNCTIONS
-  void Display() {    
+  // Display with no special effect
+  void Display(float Outline, int Transparancy) {    
 
     // Draws the button
     rectMode(CORNER);
-    noStroke();
-    fill(Color);
+    // Sets desired 'Outline' and colors it black
+    strokeWeight(Outline);
+    stroke(Color1);
+    // If no 'Outline' is defined (set to 0). No outline will be drawn
+    if (Outline == 0) {
+      noStroke();
+    }
+    fill(Color, Transparancy);
     rect(X, Y, W, H, Corners);
   }
 
-  void Display_Glow() {
+  // Display with a glowing effect
+  void Display_Glow(float Outline) {
 
     // Draws the button
     rectMode(CORNER);
-    noStroke();
+    // Sets desired 'Outline' and colors it black
+    strokeWeight(Outline);
+    stroke(Color1);
+    // If no 'Outline' is defined (set to 0). No outline will be drawn
+    if (Outline == 0) {
+      noStroke();
+    }
     fill(Color, Transparency);
     rect(X, Y, W, H, Corners);
 
@@ -51,10 +70,11 @@ class Button_Class {
     }
   }
 
-  // TEXTBOX FUNCTION
-  void Textbox(String Text, int Color, float Size) {
+  // TEXT FUNCTION
+  void Text(String Text, float Size, int Color) {
 
     // Draws the text
+    textFont(AR_Font);
     textAlign(CENTER, CENTER);
     fill(Color);
     textSize(Size);
@@ -63,6 +83,7 @@ class Button_Class {
 
 
   // CLICKABLE PAGE TO PAGE FUCTIONS
+  // For Button[0]
   void Page_1() {
 
     // Starts Vidoe1
@@ -72,6 +93,7 @@ class Button_Class {
     }
   }
 
+  // For Button[1]
   void Page_1_1() {
     if (mousePressed && mouseX >= X && mouseX <= X+W && mouseY >= Y && mouseY <= Y+H) {
       Page_1 = false;
