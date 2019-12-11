@@ -58,7 +58,7 @@ int Transparency2 = 200;
 int Transparency3 = 255;
 
 // CLASSES
-Button_Class[] Button = new Button_Class[4];
+Button_Class[] Button = new Button_Class[3];
 
 // BOOLEANS
 // Page events
@@ -80,7 +80,7 @@ void setup() {
   Fridge1 = loadImage("PAGE_0.png");
   Fridge2 = loadImage("PAGE_1.png");
   // Videos
-  Video1 = new Movie(this, "Video1.mp4");
+  Video1 = new Movie(this, "Vid1.1.mp4");
   Video2 = new Movie(this, "Vid2.mp4");
   // Fonts
   AR_Font = loadFont("BerlinSansFB-Bold-48.vlw");
@@ -118,7 +118,6 @@ void setup() {
   Button[0] = new Button_Class(B1_X, B1_Y, B1_W-B1_X, B1_H-B1_Y, Color2);
   Button[1] = new Button_Class(B2_X, B2_Y, B2_W-B2_X, B2_H-B2_Y, Color1);
   Button[2] = new Button_Class(B3_X, B3_Y, B3_W-B3_X, B3_H-B3_Y, Color4);
-  Button[3] = new Button_Class(B3_X, B3_Y, B3_W-B3_X, B3_H-B3_Y, Color4);
 }
 
 void draw() {
