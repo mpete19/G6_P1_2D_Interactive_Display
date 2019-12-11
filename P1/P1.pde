@@ -1,10 +1,12 @@
 // GLOBAL VARIABLES
 
-// TIME
+// TIME AND COUNTERS
 float Video1_Count;
 float Video1_End;
 float Video2_Count;
 float Video2_End;
+float Percentage_Increase = 0.8;
+float Percentage_Count = 0;
 
 // PICTURES, VIDEOS AND FONT
 import processing.video.*;
@@ -17,29 +19,46 @@ Movie Video2;
 // Fonts
 PFont AR_Font;
 
-// SIZES AND COORDINATS
+// SIZES, COORDINATS AND MOVEMENT
 // Images and videos
 float Image_X;
 float Image_Y;
 float Image_W;
 float Image_H;
-// Buttons
-float Outline;
+// Outlines
+float Outline1;
+float Outline2;
 // Button[0]
+float B0_X;
+float B0_Y;
+float B0_W;
+float B0_H;
+// Button[1]
 float B1_X;
 float B1_Y;
 float B1_W;
 float B1_H;
-// Button[1]
+// Button[2]
 float B2_X;
 float B2_Y;
 float B2_W;
 float B2_H;
-// Button[2]
+// Button[3]
 float B3_X;
 float B3_Y;
 float B3_W;
 float B3_H;
+// Button[4]
+float B4_X;
+float B4_Y;
+float B4_W;
+float B4_H;
+// Scan line
+float Scan_X;
+float Scan_Y;
+float Scan_X2;
+float Scan_Y2;
+float Scan_Move_Y;
 // Opening text
 float Opening_Text_S;
 // Other text
@@ -47,29 +66,27 @@ float Text1_S;
 
 // COLORS AND TRANSPARANCY
 // Colors
-int Color1 = #ED1616; // Red
+int Color1 = #2C63D8; // Blue
 int Color2 = 255; // White
-int Color3 = #EA66FC; // Pink
+int Color3 = #E33247; // Red
 int Color4 = 0; // Black
 int Color5 = 200; // Light grey
+int Color6 = 120; // Dark grey
 // Transparecies
-int Transparency1 = 0;
-int Transparency2 = 200;
-int Transparency3 = 255;
+int[] Transparency = {0, 126, 200, 255};
 
 // CLASSES
-Button_Class[] Button = new Button_Class[3];
+Button_Class[] Button = new Button_Class[5];
 
 // BOOLEANS
 // Page events
 boolean Page_0 = true;
 boolean Page_1 = false;
-boolean Page_1_1 = false;
-boolean Page_1_2 = false;
-boolean Page_1_3 = false;
-// Video events
+boolean Page_2 = false;
+// Video events and transitions
 boolean Video1_Event = false;
 boolean Video2_Event = false;
+boolean Scan_Fridge = false;
 
 void setup() {
 
@@ -77,37 +94,54 @@ void setup() {
 
   // PICTURES, VIDEOS AND FONTS
   // Pictures
-  Fridge1 = loadImage("PAGE_0.png");
-  Fridge2 = loadImage("PAGE_1.png");
+  Fridge1 = loadImage("Vid1_Trim_Moment.jpg");
+  Fridge2 = loadImage("Vid2_Trim_Moment.jpg");
   // Videos
-  Video1 = new Movie(this, "Vid1.1.mp4");
-  Video2 = new Movie(this, "Vid2.mp4");
+  Video1 = new Movie(this, "Vid1_Trim.mp4");
+  Video2 = new Movie(this, "Vid2_Trim.mp4");
   // Fonts
   AR_Font = loadFont("BerlinSansFB-Bold-48.vlw");
 
-  // SIZES AND COORDINATS (some coordinates was found by using the COORDINATION_TOOL)
+  // SIZES, COORDINATS AND MOVEMENT (some coordinates was found by using the COORDINATION_TOOL)
   // Images and videos
   Image_X = 0;
   Image_Y = 0;
   Image_W = width;
   Image_H = height;
-  // Buttons
-  Outline = (width + height) / 220;
+  // Outlines
+  Outline1 = (width + height) / 220;
+  Outline2 = (width + height) / 110;
   // Button[0]
-  B1_X = width/1.320132;
-  B1_Y = height/2.0833333;
-  B1_W = width/1.1111112;
-  B1_H = height/1.7114915;
+  B0_X = width/1.320132;
+  B0_Y = height/2.0833333;
+  B0_W = width/1.1111112;
+  B0_H = height/1.7114915;
   // Button[1]
-  B2_X = width/3.508772;
-  B2_Y = height/25.925;
-  B2_W = width/1.3651878;
-  B2_H = height/6.7961164;
+  B1_X = width/3.508772;
+  B1_Y = height/25.925;
+  B1_W = width/1.3651878;
+  B1_H = height/6.7961164;
   // Button[2]
-  B3_X = width/7.826087;
-  B3_Y = height/4.729064;
-  B3_W = width/1.1713666;
-  B3_H = height/3.4532373;
+  B2_X = width/7.826087;
+  B2_Y = height/4.729064;
+  B2_W = width/1.1713666;
+  B2_H = height/3.4532373;
+  // Button[3]
+  B3_X = width/12.0;
+  B3_Y = height/6;
+  B3_W = width/2.240664;
+  B3_H = height/3.9834025;
+  // Button[4]
+  B4_X = width/1.849315;
+  B4_Y = height/5.9259257;
+  B4_W = width/1.08;
+  B4_H = height/3.9834025;
+  // Scan line
+  Scan_X = 0;
+  Scan_Y = 0;
+  Scan_X2 = width;
+  Scan_Y2 = 0;
+  Scan_Move_Y = height/65; 
   // Opening text
   Opening_Text_S = (width + height) / 35;
   // Other text
@@ -115,30 +149,31 @@ void setup() {
 
   // CLASSES
   // ButtonClass
-  Button[0] = new Button_Class(B1_X, B1_Y, B1_W-B1_X, B1_H-B1_Y, Color2);
-  Button[1] = new Button_Class(B2_X, B2_Y, B2_W-B2_X, B2_H-B2_Y, Color1);
-  Button[2] = new Button_Class(B3_X, B3_Y, B3_W-B3_X, B3_H-B3_Y, Color4);
+  Button[0] = new Button_Class(B0_X, B0_Y, B0_W-B0_X, B0_H-B0_Y); // AR glasses
+  Button[1] = new Button_Class(B1_X, B1_Y, B1_W-B1_X, B1_H-B1_Y); // Scan fridge
+  Button[2] = new Button_Class(B2_X, B2_Y, B2_W-B2_X, B2_H-B2_Y); // Opening text
+  Button[3] = new Button_Class(B3_X, B3_Y, B3_W-B3_X, B3_H-B3_Y); //
+  Button[4] = new Button_Class(B4_X, B4_Y, B4_W-B4_X, B4_H-B4_Y); //
 }
 
 void draw() {
 
-  // PAGES
-  // PAGE_0 (closed fridge)
+  // Page_0 (closed fridge)
   if (Page_0) {
 
     // Fridge1 (image)
     image(Fridge1, Image_X, Image_Y, Image_W, Image_H);
 
+    // Opening sign
+    Button[2].Display(Outline1, Transparency[3], Transparency[2]);
+    Button[2].Text("What’s for dinner?", Opening_Text_S, Transparency[3]);
+
     // Clickable AR glasses
-    Button[0].Display_Glow(Transparency1);
+    Button[0].Display_Glow(Outline1);
+    Button[0].Text("Click for help", Text1_S, Transparency[3]);
     Button[0].Page_1();
-    Button[0].Text("Click for help", Text1_S, Color1);
 
-    // Opening text
-    Button[2].Display(Outline, Transparency2);
-    Button[2].Text("What’s for dinner?", Opening_Text_S, Color1);
-
-    // PAGE_0 to PAGE_1 (video transition)
+    // Page_0 to Page_1 (video transition)
     // First part
   } else if (Video1_Event) {
 
@@ -168,7 +203,7 @@ void draw() {
     Video2_Count = int(Video2.time());
     Video2_End = int(Video2.duration());
 
-    // Ends video transition and continues to PAGE_1
+    // Ends video transition and continues to Page_1
     if (Video2_Count >= Video2_End) {
 
       Video2_Event = false;
@@ -176,14 +211,67 @@ void draw() {
     }
   }
 
-  // PAGE_1 (open fridge)
+  // Page_1 (open fridge)
   if (Page_1) { 
 
     // Fridge2 (image)
     image(Fridge2, Image_X, Image_Y, Image_W, Image_H);
 
     // Clickable "SCAN FRIDGE"-button
-    Button[1].Display(Outline, Transparency2);
-    Button[1].Text("SCAN FRIDGE", Text1_S, Color4);
+    Button[1].Display_Glow(Outline1);
+    Button[1].Text("SCAN FRIDGE", Text1_S, Transparency[3]);
+    Button[1].Page_2();
+
+    // Page_1 to Page_2 (animation transition)
+  } else if (Scan_Fridge) {
+
+    // Fridge2 (image)
+    image(Fridge2, Image_X, Image_Y, Image_W, Image_H);
+
+    // "SCANNING" sign
+    Button[1].Display(Outline1, Transparency[1], Transparency[1]);
+    Button[1].Text("SCANNING  "+int(Percentage_Count)+"%", Text1_S, Transparency[1]);
+    // Starts a counter that illustrates a percentage counter of the scanning process
+    Percentage_Count = Percentage_Count + Percentage_Increase;
+    // Stops the perentage counter and sets it to '100' if it increases to or above 100
+    if (Percentage_Count >= 100) {
+      Percentage_Count = 100;
+    }
+
+    // Scan animation
+    stroke(Color3, Transparency[3]);
+    strokeWeight(Outline2);
+    line(Scan_X, Scan_Y, Scan_X2, Scan_Y2);
+    Scan_Y = Scan_Y + Scan_Move_Y; 
+    Scan_Y2 = Scan_Y2 + Scan_Move_Y;
+
+    // Reverses animation
+    if (Scan_Y >= height && Scan_Y2 >= height) {
+      Scan_Move_Y = Scan_Move_Y * -1;
+    } 
+
+    // Ends animation transition and continues to Page_2
+    if (Scan_Y < 0 && Scan_Y2 < 0) {
+      Scan_Fridge = false;
+      Page_2 = true;
+    }
+  } 
+
+  // Page_2 (flow chart on open fridge)
+  if (Page_2) {
+    // Fridge2 (image)
+    image(Fridge2, Image_X, Image_Y, Image_W, Image_H);
+
+    // "FRIDGE SCANNED" sign
+    Button[1].Display(Outline1, Transparency[1], Transparency[1]);
+    Button[1].Text("FRIDGE  SCANNED", Text1_S, Transparency[1]);
+
+    // Clickable "Grocery facts"-button
+    Button[3].Display_Glow(Outline1);
+    Button[3].Text("Grocery facts", Text1_S, Transparency[3]);
+
+    // Clickable "Search for recipes"-button
+    Button[4].Display_Glow(Outline1);
+    Button[4].Text("Search for recipes", Text1_S, Transparency[3]);
   }
 }
