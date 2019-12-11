@@ -30,33 +30,21 @@ class Button_Class {
 
   // DISPLAY FUNCTIONS
   // Display with no special effect
-  void Display(float Temp_Outline, int Temp_Transparancy_Outline, int Temp_Transparancy) {    
+  void Display(int Temp_Transparancy) {    
 
     // Draws the button
     rectMode(CORNER);
-    // Sets desired 'Outline' and colors it black
-    strokeWeight(Temp_Outline);
-    stroke(Color2, Temp_Transparancy_Outline);
-    // If no 'Outline' is defined (set to 0). No outline will be drawn
-    if (Temp_Outline == 0) {
-      noStroke();
-    }
+    noStroke();
     fill(Color1, Temp_Transparancy);
     rect(X, Y, W, H, Corners);
   }
 
   // Display with a glowing effect
-  void Display_Glow(float Temp_Outline) {
+  void Display_Glow() {
 
     // Draws the button
     rectMode(CORNER);
-    // Sets desired 'Outline' and colors it black
-    strokeWeight(Temp_Outline);
-    stroke(Color2, Transparency);
-    // If no 'Outline' is defined (set to 0). No outline will be drawn
-    if (Temp_Outline == 0) {
-      noStroke();
-    }
+    noStroke();
     fill(Color1, Transparency);
     rect(X, Y, W, H, Corners);
 

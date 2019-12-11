@@ -25,9 +25,6 @@ float Image_X;
 float Image_Y;
 float Image_W;
 float Image_H;
-// Outlines
-float Outline1;
-float Outline2;
 // Button[0]
 float B0_X;
 float B0_Y;
@@ -53,16 +50,32 @@ float B4_X;
 float B4_Y;
 float B4_W;
 float B4_H;
+// Arrow to AR glasses
+float AR_Arrow_X;
+float AR_Arrow_Y;
+float AR_Arrow_X2;
+float AR_Arrow_Y2;
+float AR_Arrow_X3;
+float AR_Arrow_Y3;
+float AR_Line_X;
+float AR_Line_Y;
+float AR_Line_X2;
+float AR_Line_Y2;
+float Arrow_Size;
 // Scan line
 float Scan_X;
 float Scan_Y;
 float Scan_X2;
 float Scan_Y2;
 float Scan_Move_Y;
+float Scan_Size;
 // Opening text
 float Opening_Text_S;
+// AR Glasses text
+float AR_Text_X;
+float AR_Text_Y;
 // Other text
-float Text1_S;
+float Text1_Size;
 
 // COLORS AND TRANSPARANCY
 // Colors
@@ -108,9 +121,6 @@ void setup() {
   Image_Y = 0;
   Image_W = width;
   Image_H = height;
-  // Outlines
-  Outline1 = (width + height) / 220;
-  Outline2 = (width + height) / 110;
   // Button[0]
   B0_X = width/1.320132;
   B0_Y = height/2.0833333;
@@ -136,24 +146,40 @@ void setup() {
   B4_Y = height/5.9259257;
   B4_W = width/1.08;
   B4_H = height/3.9834025;
+  // Arrow to AR glasses
+  AR_Arrow_X = width/1.2189616;
+  AR_Arrow_Y = height/2.1192052;
+  AR_Arrow_X2 = width/1.2471131;
+  AR_Arrow_Y2 = height/2.2429907;
+  AR_Arrow_X3 = width/1.1612903;
+  AR_Arrow_Y3 = height/2.2068965;
+  AR_Line_X = width/1.2026726;
+  AR_Line_Y = height/2.2222223;
+  AR_Line_X2 = width/1.1663067;
+  AR_Line_Y2 = height/2.4935064;
+  Arrow_Size = (width + height) / 220;
   // Scan line
   Scan_X = 0;
   Scan_Y = 0;
   Scan_X2 = width;
   Scan_Y2 = 0;
-  Scan_Move_Y = height/65; 
+  Scan_Move_Y = height/65;
+  Scan_Size = (width + height) / 110;
   // Opening text
-  Opening_Text_S = (width + height) / 35;
+  Opening_Text_S = (width + height) / 50;
+  // AR Glasses text
+  AR_Text_X = width/1.1612903;
+  AR_Text_Y = height/2.8486648;
   // Other text
-  Text1_S = (width + height) / 55;
+  Text1_Size = (width + height) / 55;
 
   // CLASSES
   // ButtonClass
   Button[0] = new Button_Class(B0_X, B0_Y, B0_W-B0_X, B0_H-B0_Y); // AR glasses
   Button[1] = new Button_Class(B1_X, B1_Y, B1_W-B1_X, B1_H-B1_Y); // Scan fridge
   Button[2] = new Button_Class(B2_X, B2_Y, B2_W-B2_X, B2_H-B2_Y); // Opening text
-  Button[3] = new Button_Class(B3_X, B3_Y, B3_W-B3_X, B3_H-B3_Y); //
-  Button[4] = new Button_Class(B4_X, B4_Y, B4_W-B4_X, B4_H-B4_Y); //
+  Button[3] = new Button_Class(B3_X, B3_Y, B3_W-B3_X, B3_H-B3_Y); // Grocery facts
+  Button[4] = new Button_Class(B4_X, B4_Y, B4_W-B4_X, B4_H-B4_Y); // Search for recipes
 }
 
 void draw() {
@@ -165,13 +191,19 @@ void draw() {
     image(Fridge1, Image_X, Image_Y, Image_W, Image_H);
 
     // Opening sign
-    Button[2].Display(Outline1, Transparency[3], Transparency[2]);
     Button[2].Text("What’s for dinner?", Opening_Text_S, Transparency[3]);
 
-    // Clickable AR glasses
-    Button[0].Display_Glow(Outline1);
-    Button[0].Text("Click for help", Text1_S, Transparency[3]);
+    // Clickable AR glasses with text above
+    textAlign(CENTER, CENTER);
+    textFont(AR_Font);
+    textSize(Text1_Size);
+    text("Click\nfor\nhelp", AR_Text_X, AR_Text_Y);
     Button[0].Page_1();
+
+    // Arrow leading form AR glass text to AR glasses
+    strokeWeight(Arrow_Size);
+    line(AR_Line_X, AR_Line_Y, AR_Line_X2, AR_Line_Y2);
+    triangle(AR_Arrow_X, AR_Arrow_Y, AR_Arrow_X2, AR_Arrow_Y2, AR_Arrow_X3, AR_Arrow_Y3);
 
     // Page_0 to Page_1 (video transition)
     // First part
@@ -218,8 +250,8 @@ void draw() {
     image(Fridge2, Image_X, Image_Y, Image_W, Image_H);
 
     // Clickable "SCAN FRIDGE"-button
-    Button[1].Display_Glow(Outline1);
-    Button[1].Text("SCAN FRIDGE", Text1_S, Transparency[3]);
+    Button[1].Display_Glow();
+    Button[1].Text("SCAN FRIDGE", Text1_Size, Transparency[3]);
     Button[1].Page_2();
 
     // Page_1 to Page_2 (animation transition)
@@ -229,10 +261,12 @@ void draw() {
     image(Fridge2, Image_X, Image_Y, Image_W, Image_H);
 
     // "SCANNING" sign
-    Button[1].Display(Outline1, Transparency[1], Transparency[1]);
-    Button[1].Text("SCANNING  "+int(Percentage_Count)+"%", Text1_S, Transparency[1]);
+    Button[1].Display(Transparency[1]);
+    Button[1].Text("SCANNING\n"+int(Percentage_Count)+"%", Text1_Size, Transparency[1]);
+
     // Starts a counter that illustrates a percentage counter of the scanning process
     Percentage_Count = Percentage_Count + Percentage_Increase;
+
     // Stops the perentage counter and sets it to '100' if it increases to or above 100
     if (Percentage_Count >= 100) {
       Percentage_Count = 100;
@@ -240,7 +274,7 @@ void draw() {
 
     // Scan animation
     stroke(Color3, Transparency[3]);
-    strokeWeight(Outline2);
+    strokeWeight(Scan_Size);
     line(Scan_X, Scan_Y, Scan_X2, Scan_Y2);
     Scan_Y = Scan_Y + Scan_Move_Y; 
     Scan_Y2 = Scan_Y2 + Scan_Move_Y;
@@ -263,15 +297,15 @@ void draw() {
     image(Fridge2, Image_X, Image_Y, Image_W, Image_H);
 
     // "FRIDGE SCANNED" sign
-    Button[1].Display(Outline1, Transparency[1], Transparency[1]);
-    Button[1].Text("FRIDGE  SCANNED", Text1_S, Transparency[1]);
+    Button[1].Display(Transparency[1]);
+    Button[1].Text("FRIDGE\nSCANNED", Text1_Size, Transparency[1]);
 
     // Clickable "Grocery facts"-button
-    Button[3].Display_Glow(Outline1);
-    Button[3].Text("Grocery facts", Text1_S, Transparency[3]);
+    Button[3].Display_Glow();
+    Button[3].Text("Grocery facts", Text1_Size, Transparency[3]);
 
     // Clickable "Search for recipes"-button
-    Button[4].Display_Glow(Outline1);
-    Button[4].Text("Search for recipes", Text1_S, Transparency[3]);
+    Button[4].Display_Glow();
+    Button[4].Text("Search for recipes", Text1_Size, Transparency[3]);
   }
 }
