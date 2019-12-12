@@ -124,10 +124,10 @@ int[] Transparency = {0, 126, 200, 255};
 
 // BOOLEANS
 // Page events
-boolean Page_0 = false;
+boolean Page_0 = true;
 boolean Page_1 = false;
-boolean Page_2 = true;
-boolean Page_2_Front = true;
+boolean Page_2 = false;
+boolean Page_2_Front = false;
 boolean Page_2_1 = false;
 boolean Page_2_2 = false;
 boolean Page_2_3 = false;
