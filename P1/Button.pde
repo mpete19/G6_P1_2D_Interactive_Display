@@ -79,6 +79,7 @@ class Button_Class {
 
 
   // CLICKABLE PAGE TO PAGE FUCTIONS
+
   // AR Glasses
   void Page_1() {
     if (mousePressed && mouseX >= X && mouseX <= X+W && mouseY >= Y && mouseY <= Y+H) {
@@ -94,22 +95,50 @@ class Button_Class {
       Scan_Fridge = true;
     }
   }
+
+  void Back_To_Page_2_Front() {
+    if (mousePressed && mouseX >= X && mouseX <= X+W && mouseY >= Y && mouseY <= Y+H) {
+      Page_2_Front = true;
+      Page_2_1 = false;
+      Page_2_2 = false;
+      Page_2_3 = false;
+
+      // Reset button locations
+      Button[4].Relocate(X_Right, Y_Top1, W_Right-X_Right, H_Top1-Y_Top1);
+      Button[5].Relocate(X_Right, Y_Top2, W_Right-X_Right, B5_H-Y_Top2);
+      Button[6].Relocate(X_Right, Y_Top3_Right, B6_W-X_Right, H_Top3_Right-Y_Top3_Right);
+      Button[7].Relocate(B7_X, Y_Top3_Right, W_Right-B7_X, H_Top3_Right-Y_Top3_Right);
+    }
+  }
+
   void Page_2_1() {
     if (mousePressed && mouseX >= X && mouseX <= X+W && mouseY >= Y && mouseY <= Y+H) {
       Page_2_Front = false;
       Page_2_1 = true;
     }
   } 
+
   void Page_2_2() {
     if (mousePressed && mouseX >= X && mouseX <= X+W && mouseY >= Y && mouseY <= Y+H) {
       Page_2_Front = false;
       Page_2_2 = true;
     }
   }
+
   void Page_2_3() {
     if (mousePressed && mouseX >= X && mouseX <= X+W && mouseY >= Y && mouseY <= Y+H) {
       Page_2_1 = false;
       Page_2_3 = true;
+    }
+  }
+
+  void Yes() {
+    if (mousePressed && mouseX >= X && mouseX <= X+W && mouseY >= Y && mouseY <= Y+H) {
+      Page_2 = false;
+      Page_2_1 = false;
+      Page_2_2 = false;
+      Page_2_3 = false;
+      Video3_Event = true;
     }
   }
 }

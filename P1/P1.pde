@@ -1,12 +1,26 @@
 // GLOBAL VARIABLES
 
+// STRINGS
+String Opening_Text = "What's\nfor\ndinner?";
+String AR_Glasses_Text = "Click\nfor\nhelp";
+String Scan_Fridge_Text = "SCAN FRIDGE";
+String Scanning_Text = "SCANNING\n";
+String Percentage_Symbol_Text = "%";
+String Fridge_Scanned_Text = "FRIDGE\nSCANNED";
+String Grocery_Facts_Text = "Grocery facts";
+String Search_For_Recipes_Text = "Search for recipes";
+String Nutrition_Text = "Apple - 72 kcal (138g)\nSausage - 189 kcal (64g)\nCarrots - 46 kcal (113g)\nPotatoes - 51 kcal (100g)\nMushroom  - 26 kcal (100g)";
+String Shopping_Text = "Are you willing to go grocery shopping in order to get more recipes?";
+String Yes_Text = "Yes, expand my options";
+String No_Text = "No, find recipes from current inventory";
+String Go_Back_Text = "BACK";
+
 // TIME AND COUNTERS
-float Video1_Count;
-float Video1_End;
-float Video2_Count;
-float Video2_End;
+float Video_Count;
+float Video_End;
 float Percentage_Increase = 0.8;
 float Percentage_Count = 0;
+float Percantage_Max = 100;
 
 // PICTURES, VIDEOS AND FONT
 import processing.video.*;
@@ -16,8 +30,12 @@ PImage Fridge2;
 // Videos
 Movie Video1;
 Movie Video2;
+Movie Video3;
 // Fonts
 PFont AR_Font;
+
+// CLASSES
+Button_Class[] Button = new Button_Class[8];
 
 // SIZES, COORDINATS AND MOVEMENT
 // Images and videos
@@ -36,11 +54,13 @@ float Y_Top1;
 float H_Top1;
 float Y_Top2;
 float H_Top2;
-float Y_Top2_2;
-float H_Top2_2;
-float Y_Top3;
-float Y_Top4;
-float Y_Top5;
+float Y_Top3_Left;
+float H_Top3_Left;
+float Y_Top3_Right;
+float H_Top3_Right;
+float Y_Top4_Left;
+float H_Top4_Left;
+float Y_Top5_Left;
 // Button[0]
 float B0_X;
 float B0_Y;
@@ -102,9 +122,6 @@ int Color_Dark_Gray = 120; // Dark gray
 // Transparecies
 int[] Transparency = {0, 126, 200, 255};
 
-// CLASSES
-Button_Class[] Button = new Button_Class[8];
-
 // BOOLEANS
 // Page events
 boolean Page_0 = false;
@@ -117,6 +134,7 @@ boolean Page_2_3 = false;
 // Video events and transitions
 boolean Video1_Event = false;
 boolean Video2_Event = false;
+boolean Video3_Event = false;
 boolean Scan_Fridge = false;
 
 void setup() {
@@ -130,6 +148,7 @@ void setup() {
   // Videos
   Video1 = new Movie(this, "Vid1_Trim.mp4");
   Video2 = new Movie(this, "Vid2_Trim.mp4");
+  Video3 = new Movie(this, "Vid3.mp4");
   // Fonts
   AR_Font = createFont("Helvetica-65-Medium_22443.ttf", 24);
 
@@ -150,11 +169,13 @@ void setup() {
   H_Top1 = height/3.902439;
   Y_Top2 = height/3.764706;
   H_Top2 = height/2.4489796;
-  Y_Top2_2 = height/2.7988338;
-  H_Top2_2 = height/2.4489796;
-  Y_Top3 = height/2.394015;
-  Y_Top4 = height/2.0960698;
-  Y_Top5 = height/1.7843866;
+  Y_Top3_Left = height/2.382134;
+  H_Top3_Left = height/2.1719458;
+  Y_Top3_Right = height/2.8656716;
+  H_Top3_Right = height/2.0960698;
+  Y_Top4_Left = height/2.1333334;
+  H_Top4_Left = height/1.8079096;
+  Y_Top5_Left = height/1.7843866;
   // Button[0]
   B0_X = width/1.320132;
   B0_Y = height/2.0833333;
@@ -214,8 +235,8 @@ void setup() {
   Button[3] = new Button_Class(X_Left, Y_Top1, W_Left-X_Left, H_Top1-Y_Top1); // Grocery facts
   Button[4] = new Button_Class(X_Right, Y_Top1, W_Right-X_Right, H_Top1-Y_Top1); // Search for recipes
   Button[5] = new Button_Class(X_Right, Y_Top2, W_Right-X_Right, B5_H-Y_Top2); // Are you willing to go grocery shopping?
-  Button[6] = new Button_Class(X_Right, Y_Top2_2, B6_W-X_Right, H_Top2_2-Y_Top2_2); // Yes
-  Button[7] = new Button_Class(B7_X, Y_Top2_2, W_Right-B7_X, H_Top2_2-Y_Top2_2); // No
+  Button[6] = new Button_Class(X_Right, Y_Top3_Right, B6_W-X_Right, H_Top3_Right-Y_Top3_Right); // Yes
+  Button[7] = new Button_Class(B7_X, Y_Top3_Right, W_Right-B7_X, H_Top3_Right-Y_Top3_Right); // No
 }
 
 void draw() {
@@ -233,56 +254,59 @@ void draw() {
 
     // Opening text
     textSize(Opening_Text_S);
-    text("What’s\nfor\ndinner?", Opening_Text_X, Opening_Text_Y);
+    text(Opening_Text, Opening_Text_X, Opening_Text_Y);
 
     // Clickable AR glasses with text above
     textSize(Text1_Size);
-    text("Click\nfor\nhelp", AR_Text_X, AR_Text_Y);
+    text(AR_Glasses_Text, AR_Text_X, AR_Text_Y);
     Button[0].Page_1();
 
     // Arrow leading form AR glass text to AR glasses
     strokeWeight(Arrow_Size);
     line(AR_Line_X, AR_Line_Y, AR_Line_X2, AR_Line_Y2);
     triangle(AR_Arrow_X, AR_Arrow_Y, AR_Arrow_X2, AR_Arrow_Y2, AR_Arrow_X3, AR_Arrow_Y3);
+  }
 
-    // Page_0 to Page_1 (video transition)
-    // First part
-  } else if (Video1_Event) {
+  // Page_0 to Page_1 (video transition)
+  // First part (video transition)
+  if (Video1_Event) {
 
     // Plays Video1 (video)
     Video1.play();
     image(Video1, Image_X, Image_Y, Image_W, Image_H);
 
     // Counts towards the end of Video1
-    Video1_Count = int(Video1.time());
-    Video1_End = int(Video1.duration());
+    Video_Count = int(Video1.time());
+    Video_End = int(Video1.duration());
 
     // Ends first part and move forward to second part of the video transition
-    if (Video1_Count >= Video1_End) {
+    if (Video_Count >= Video_End) {
 
+      Video1.stop();
       Video1_Event = false;
       Video2_Event = true;
     }
+  }
 
-    // Second part
-  } else if (Video2_Event) {
+  // Second part (video transition)
+  if (Video2_Event) {
 
     // Plays Video2 (video)
     Video2.play();
     image(Video2, Image_X, Image_Y, Image_W, Image_H);
 
     // Counts towards the end of Video2
-    Video2_Count = int(Video2.time());
-    Video2_End = int(Video2.duration());
+    Video_Count = int(Video2.time());
+    Video_End = int(Video2.duration());
 
     // Ends video transition and continues to Page_1
-    if (Video2_Count >= Video2_End) {
+    if (Video_Count >= Video_End) {
 
+      Video2.stop();
       Video2_Event = false;
       Page_1 = true;
     }
   }
-
   // Page_1 (open fridge)
   if (Page_1) { 
 
@@ -291,25 +315,26 @@ void draw() {
 
     // Clickable "SCAN FRIDGE"-button
     Button[1].Display_Glow();
-    Button[1].Text("SCAN FRIDGE", Text1_Size, Transparency[3]);
+    Button[1].Text(Scan_Fridge_Text, Text1_Size, Transparency[3]);
     Button[1].Page_2();
+  }
 
-    // Page_1 to Page_2 (animation transition)
-  } else if (Scan_Fridge) {
+  // Page_1 to Page_2 (animation transition)
+  if (Scan_Fridge) {
 
     // Fridge2 (image)
     image(Fridge2, Image_X, Image_Y, Image_W, Image_H);
 
     // "SCANNING" sign
     Button[1].Display(Transparency[1]);
-    Button[1].Text("SCANNING\n"+int(Percentage_Count)+"%", Text1_Size, Transparency[1]);
+    Button[1].Text(Scanning_Text+int(Percentage_Count)+Percentage_Symbol_Text, Text1_Size, Transparency[1]);
 
     // Starts a counter that illustrates a percentage counter of the scanning process
     Percentage_Count = Percentage_Count + Percentage_Increase;
 
     // Stops the perentage counter and sets it to '100' if it increases to or above 100
-    if (Percentage_Count >= 100) {
-      Percentage_Count = 100;
+    if (Percentage_Count >= Percantage_Max) {
+      Percentage_Count = Percantage_Max;
     }
 
     // Scan animation
@@ -328,8 +353,9 @@ void draw() {
     if (Scan_Y < 0 && Scan_Y2 < 0) {
       Scan_Fridge = false;
       Page_2 = true;
+      Page_2_Front = true;
     }
-  } 
+  }
 
   // Page_2 (flow chart on open fridge)
   if (Page_2) {
@@ -339,21 +365,31 @@ void draw() {
       tint(Color_White, Transparency[1]); 
       image(Fridge2, Image_X, Image_Y, Image_W, Image_H);
 
-      // "FRIDGE SCANNED" sign
-      Button[1].Display(Transparency[1]);
-      Button[1].Text("FRIDGE\nSCANNED", Text1_Size, Transparency[1]);
-
+      // Multiple choice buttons to go forth
       if (Page_2_Front) {
+
+        // "FRIDGE SCANNED" sign
+        Button[1].Display(Transparency[1]);
+        Button[1].Text(Fridge_Scanned_Text, Text1_Size, Transparency[1]);
 
         // Clickable "Grocery facts"-button
         Button[3].Display_Glow();
-        Button[3].Text("Grocery facts", Text1_Size, Transparency[3]);
+        Button[3].Text(Grocery_Facts_Text, Text1_Size, Transparency[3]);
         Button[3].Page_2_1();
 
         // Clickable "Search for recipes"-button
         Button[4].Display_Glow();
-        Button[4].Text("Search for recipes", Text1_Size, Transparency[3]);
+        Button[4].Text(Search_For_Recipes_Text, Text1_Size, Transparency[3]);
         Button[4].Page_2_2();
+      }
+
+      // Option to go back to Page_2_Front
+      if (!Page_2_Front) {
+
+        // Clickable "BACK"-button
+        Button[1].Display_Glow();
+        Button[1].Text(Go_Back_Text, Text1_Size, Transparency[3]);
+        Button[1].Back_To_Page_2_Front();
       }
 
       // Page_2_1 if "Grocery facts"-button is clicked (Nutrition facts)
@@ -361,70 +397,89 @@ void draw() {
 
         // "Grocery facts" sign
         Button[3].Display(Transparency[1]);
-        Button[3].Text("Grocery facts", Text1_Size, Transparency[1]);
+        Button[3].Text(Grocery_Facts_Text, Text1_Size, Transparency[1]);
 
         // "Nutrtition facts" sign (Not transparent)
         Button[2].Display(Transparency[3]);
-        Button[2].Text("Apple - 72 kcal (138g)\nSausage - 189 kcal (64g)\nCarrots - 46 kcal (113g)\nPotatoes - 51 kcal (100g)\nMushroom  - 26 kcal (100g)", Text2_Size, Transparency[3]);
+        Button[2].Text(Nutrition_Text, Text2_Size, Transparency[3]);
 
         // Clickable "Search for recipes"-button
-        Button[4].Relocate(X_Left, Y_Top3, W_Left-X_Left, H_Top2_2-Y_Top2_2);
+        Button[4].Relocate(X_Left, Y_Top3_Left, W_Left-X_Left, H_Top3_Left-Y_Top3_Left);
         Button[4].Display_Glow();
-        Button[4].Text("Search for recipes", Text2_Size, Transparency[3]);
+        Button[4].Text(Search_For_Recipes_Text, Text2_Size, Transparency[3]);
         Button[4].Page_2_3();
       }
 
       // Page_2_2 if "Search for recipes"-button is clicked (Are you willing to go grocery shopping?)
       if (Page_2_2) {
 
-        // "Search for recipes" sign
+        // Clickable "Search for recipes"-button
         Button[4].Display(Transparency[1]);
-        Button[4].Text("Search for recipes", Text1_Size, Transparency[1]);
+        Button[4].Text(Search_For_Recipes_Text, Text1_Size, Transparency[1]);
 
         // "Are you willing to go grocery shopping?" sign (Not transparent)
         Button[5].Display(Transparency[3]);
-        Button[5].Text("Are you willing to go grocery shopping?", Text2_Size, Transparency[3]);
+        Button[5].Text(Shopping_Text, Text2_Size, Transparency[3]);
 
         // Clickable "Yes"-button
         Button[6].Display_Glow();
-        Button[6].Text("Yes", Text3_Size, Transparency[3]);
+        Button[6].Text(Yes_Text, Text2_Size, Transparency[3]);
+        Button[6].Yes();
 
         // Clickable "No"-button
         Button[7].Display_Glow();
-        Button[7].Text("No", Text3_Size, Transparency[3]);
+        Button[7].Text(No_Text, Text2_Size, Transparency[3]);
       }
 
       // Page_2_3 after Page_2_1
       if (Page_2_3) {
 
-        // "Grocery facts" sign
+        // Clickable "Grocery facts"-button
         Button[3].Display(Transparency[1]);
-        Button[3].Text("Grocery facts", Text1_Size, Transparency[1]);
+        Button[3].Text(Grocery_Facts_Text, Text1_Size, Transparency[3]);
 
         // "Nutrtition facts" sign
         Button[2].Display(Transparency[1]);
-        Button[2].Text("Apple - 72 kcal (138g)\nSausage - 189 kcal (64g)\nCarrots - 46 kcal (113g)\nPotatoes - 51 kcal (100g)\nMushroom  - 26 kcal (100g)", Text2_Size, Transparency[1]);
+        Button[2].Text(Nutrition_Text, Text2_Size, Transparency[1]);
 
         // "Search for recipes" sign
-        Button[4].Relocate(X_Left, Y_Top3, W_Left-X_Left, H_Top2_2-Y_Top2_2);
+        Button[4].Relocate(X_Left, Y_Top3_Left, W_Left-X_Left, H_Top3_Left-Y_Top3_Left);
         Button[4].Display(Transparency[1]);
-        Button[4].Text("Search for recipes", Text2_Size, Transparency[1]);
+        Button[4].Text(Search_For_Recipes_Text, Text2_Size, Transparency[1]);
 
         // "Are you willing to go grocery shopping?" sign (Not transparent)
-        Button[5].Relocate(X_Left, Y_Top4, W_Left-X_Left, B5_H-Y_Top2);
+        Button[5].Relocate(X_Left, Y_Top4_Left, W_Left-X_Left, H_Top4_Left-Y_Top4_Left);
         Button[5].Display(Transparency[3]);
-        Button[5].Text("Are you willing to go grocery shopping?", Text2_Size, Transparency[3]);
+        Button[5].Text(Shopping_Text, Text2_Size, Transparency[3]);
 
         // Clickable "Yes"-button
-        Button[6].Relocate(X_Left, Y_Top5, B6_W_Relocate-X_Left, H_Top2_2-Y_Top2_2);
+        Button[6].Relocate(X_Left, Y_Top5_Left, B6_W_Relocate-X_Left, H_Top3_Right-Y_Top3_Right);
         Button[6].Display_Glow();
-        Button[6].Text("Yes", Text3_Size, Transparency[3]);
+        Button[6].Text(Yes_Text, Text2_Size, Transparency[3]);
+        Button[6].Yes();
 
         // Clickable "No"-button
-        Button[7].Relocate(B7_X_Relocate, Y_Top5, W_Left-B7_X_Relocate, H_Top2_2-Y_Top2_2);
+        Button[7].Relocate(B7_X_Relocate, Y_Top5_Left, W_Left-B7_X_Relocate, H_Top3_Right-Y_Top3_Right);
         Button[7].Display_Glow();
-        Button[7].Text("No", Text3_Size, Transparency[3]);
+        Button[7].Text(No_Text, Text2_Size, Transparency[3]);
       }
+    }
+  } 
+  if (Video3_Event) {
+
+    // Plays Video3 (video)
+    Video3.play();
+    image(Video3, Image_X, Image_Y, Image_W, Image_H);
+
+    // Counts towards the end of Video3
+    Video_Count = int(Video3.time());
+    Video_End = int(Video3.duration());
+
+    // Ends Video3_Event
+    if (Video_Count >= Video_End) {
+
+      Video3.stop();
+      Video3_Event = false;
     }
   }
 }
