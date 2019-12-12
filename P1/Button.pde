@@ -7,18 +7,19 @@ class Button_Class {
   float Y;
   float W;
   float H;
+
   // Rect specific
   int Corners = 20; // Used to make curved edges
 
   // COLORS
-  int Color1 = #2C63D8; // Blue
+  int Color1 = #427BF2; // Blue
   int Color2 = 0; //Black
 
   // TRANSPARENCIES
-  float Transparency = 180;
-  float Low_Transparency = 180;
-  float High_Transparency = 220;
-  float Change_Transparency = 4;
+  float Transparency = 155;
+  float Low_Transparency = 155;
+  float High_Transparency = 255;
+  float Change_Transparency = 7;
 
   // TEMPLATE
   Button_Class(float Temp_X, float Temp_Y, float Temp_W, float Temp_H) {
@@ -55,6 +56,16 @@ class Button_Class {
     }
   }
 
+  // RELOCATE FUCTION
+  void Relocate(float Temp_X, float Temp_Y, float Temp_W, float Temp_H) {
+
+    // Changes coordinates of the template
+    X = Temp_X;
+    Y = Temp_Y;
+    W = Temp_W;
+    H = Temp_H;
+  }
+
   // TEXT FUNCTION
   void Text(String Text, float Size, int Transparency) {
 
@@ -68,7 +79,7 @@ class Button_Class {
 
 
   // CLICKABLE PAGE TO PAGE FUCTIONS
-  // For Button[0]
+  // AR Glasses
   void Page_1() {
     if (mousePressed && mouseX >= X && mouseX <= X+W && mouseY >= Y && mouseY <= Y+H) {
       Page_0 = false;
@@ -76,11 +87,29 @@ class Button_Class {
     }
   }
 
-  // For Button[1]
+  // Page_2 (flow chart on open fridge)
   void Page_2() {
     if (mousePressed && mouseX >= X && mouseX <= X+W && mouseY >= Y && mouseY <= Y+H) {
       Page_1 = false;
       Scan_Fridge = true;
+    }
+  }
+  void Page_2_1() {
+    if (mousePressed && mouseX >= X && mouseX <= X+W && mouseY >= Y && mouseY <= Y+H) {
+      Page_2_Front = false;
+      Page_2_1 = true;
+    }
+  } 
+  void Page_2_2() {
+    if (mousePressed && mouseX >= X && mouseX <= X+W && mouseY >= Y && mouseY <= Y+H) {
+      Page_2_Front = false;
+      Page_2_2 = true;
+    }
+  }
+  void Page_2_3() {
+    if (mousePressed && mouseX >= X && mouseX <= X+W && mouseY >= Y && mouseY <= Y+H) {
+      Page_2_1 = false;
+      Page_2_3 = true;
     }
   }
 }
