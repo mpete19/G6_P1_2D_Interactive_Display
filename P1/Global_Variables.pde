@@ -155,10 +155,10 @@ int[] Transparency = {0, 126, 200, 255};
 
 // BOOLEANS
 // Page events
-boolean Page_0 = false;
+boolean Page_0 = true;
 boolean Page_1 = false;
-boolean Page_2 = true;
-boolean Page_2_Front = true;
+boolean Page_2 = false;
+boolean Page_2_Front = false;
 boolean Page_2_1 = false;
 boolean Page_2_1_2 = false;
 boolean Page_2_1_Yes = false;
@@ -176,7 +176,7 @@ boolean Video3_Event = false;
 boolean Yes = false;
 boolean No = false;
 // Sound
-boolean Sound_1 = false;
+boolean Sound_1 = true;
 boolean Sound_2 = false;
 boolean Sound_3 = false;
 boolean Sound_4 = false;
