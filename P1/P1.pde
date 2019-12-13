@@ -6,6 +6,8 @@ void setup() {
   // Pictures
   Fridge1 = loadImage("Vid1_Trim_Moment.jpg");
   Fridge2 = loadImage("Open Fridge.png");
+  Door_List = loadImage("List.jpg");
+  Door_No_List = loadImage("Vid3_Moment.jpg");
   // Videos
   Video1 = new Movie(this, "Vid1.mp4");
   Video2 = new Movie(this, "Vid2_Trim.mp4");
@@ -19,12 +21,13 @@ void setup() {
   Image_Y = 0;
   Image_W = width;
   Image_H = height;
-  // Buttons X and W to align left side
+  // Buttons X and W to align
   X_Left = width/12.0;
   W_Left = width/2.240664;
-  // Buttons X and W to align right side
   X_Right = width/1.849315;
   W_Right = width/1.08;
+  X_Link = width/7.714286;
+  W_Link = width/1.1538461;
   // Buttons Y and H to align heights and used to calculate sizes
   Y_Top1 = height/5.9259257;
   H_Top1 = height/3.902439;
@@ -63,6 +66,12 @@ void setup() {
   // Button[7]
   B7_X = width/1.3300493;
   B7_X_Relocate = width/3.624161;
+  // Button[11]
+  B11_Y = height/2.7428572;
+  B11_H = height/2.0338984;
+  // Button[12]
+  B12_Y = height/2.0125787;
+  B12_H = height/1.8934911;
   // Arrow to AR glasses
   AR_Arrow_X = width/1.2189616;
   AR_Arrow_Y = height/2.1192052;
@@ -109,6 +118,8 @@ void setup() {
   Button[8] = new Button_Class(X_Right, Y_Top4_Right, W_Right-X_Right, H_Top4_Right-Y_Top4_Right); // Dal
   Button[9] = new Button_Class(X_Right, Y_Top5_Right, W_Right-X_Right, H_Top4_Right-Y_Top4_Right); // Egg pie
   Button[10] = new Button_Class(X_Right, Y_Top6_Right, W_Right-X_Right, H_Top4_Right-Y_Top4_Right); // Risotto
+  Button[11] = new Button_Class(X_Link, B11_Y, W_Link-X_Link, B11_H-B11_Y); // Link info
+  Button[12] = new Button_Class(X_Link, B12_Y, W_Link-X_Link, B12_H-B12_Y);
 }
 
 void draw() {
@@ -509,6 +520,31 @@ void draw() {
 
       Video3.stop();
       Video3_Event = false;
+      Page_3 = true;
     }
+  }
+
+  if (Page_3) {
+
+    if (Yes) {
+
+      // Displays closed fridge door (with list)
+      image(Door_List, Image_X, Image_Y, Image_W, Image_H);
+    }
+
+    if (No) {
+
+      // Displays closed fridge door (no list)
+      image(Door_No_List, Image_X, Image_Y, Image_W, Image_H);
+    }
+
+    // Link info
+    Button[11].Display(Transparency[3]);
+    Button[11].Text(Link_Text, Text1_Size, Transparency[3]);
+
+    // Exits program and opens youtube
+    Button[12].Display_Glow();
+    Button[12].Text(Link_Text2, Text2_Size, Transparency[3]);
+    Button[12].Link();
   }
 }

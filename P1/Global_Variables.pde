@@ -18,6 +18,9 @@ String Risotto_Text = "Risotto (1 serving, 222 kcal)\nCreate a grocery list";
 String Pasta_Text = "Pasta bolognese (1 serving, 364 kcal)\nStart cooking!";
 String Noodle_Text = "Fried noodles (1 serving, 286 kcal)\nStart cooking!";
 String Soup_Text = "Tomato soup (1 serving, 204 kcal)\nStart cooking!";
+String Link_Text = "Here is an example of how AR can assist you when preparing a meal";
+String Link_Text2 = "Exit and open youtube";
+String Link = "https://www.youtube.com/watch?v=N2Rq0p7j5Xw";
 
 // TIME AND COUNTERS
 float Video_Count;
@@ -26,20 +29,24 @@ float Percentage_Increase = 0.8;
 float Percentage_Count = 0;
 float Percantage_Max = 100;
 
-// PICTURES, VIDEOS AND FONT
+// PICTURES, VIDEOS, FONTS AND SOUNDS
 import processing.video.*;
+import processing.sound.*;
 // Pictures
 PImage Fridge1;
 PImage Fridge2;
+PImage Door_No_List;
+PImage Door_List;
 // Videos
 Movie Video1;
 Movie Video2;
 Movie Video3;
 // Fonts
 PFont AR_Font;
+// Sound
 
 // CLASSES
-Button_Class[] Button = new Button_Class[11];
+Button_Class[] Button = new Button_Class[13];
 
 // SIZES, COORDINATS AND MOVEMENT
 // Images and videos
@@ -47,12 +54,13 @@ float Image_X;
 float Image_Y;
 float Image_W;
 float Image_H;
-// Buttons X and W align left side
+// Buttons X and W to align
 float X_Left;
 float W_Left;
-// Buttons X and W align right side
 float X_Right;
 float W_Right;
+float X_Link;
+float W_Link;
 // Buttons Y and H to align heights and used to calculate sizes
 float Y_Top1;
 float H_Top1;
@@ -91,6 +99,12 @@ float B6_W_Relocate;
 // Button[7]
 float B7_X;
 float B7_X_Relocate;
+// Buttons[11]
+float B11_Y;
+float B11_H;
+// Button[12]
+float B12_Y;
+float B12_H;
 // Arrow to AR glasses
 float AR_Arrow_X;
 float AR_Arrow_Y;
@@ -144,8 +158,12 @@ boolean Page_2_1_No = false;
 boolean Page_2_2_1 = false;
 boolean Page_2_2_Yes = false;
 boolean Page_2_2_No = false;
+boolean Page_3 = false;
 // Video events and transitions
 boolean Video1_Event = false;
 boolean Video2_Event = false;
 boolean Scan_Fridge = false;
 boolean Video3_Event = false;
+// Yes or no
+boolean Yes = false;
+boolean No = false;

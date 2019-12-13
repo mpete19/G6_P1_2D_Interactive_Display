@@ -106,6 +106,8 @@ class Button_Class {
       Page_2_2_1 = false;
       Page_2_2_Yes = false;
       Page_2_2_No = false;
+      Yes = false;
+      No = false;
 
       // Reset button locations
       Button[4].Relocate(X_Right, Y_Top1, W_Right-X_Right, H_Top1-Y_Top1);
@@ -142,6 +144,7 @@ class Button_Class {
   void Yes_Left() {
     if (mousePressed && mouseX >= X && mouseX <= X+W && mouseY >= Y && mouseY <= Y+H) {
       Page_2_1_2 = false;
+      Yes = true;
       Page_2_1_Yes = true;
     }
   }
@@ -149,6 +152,7 @@ class Button_Class {
   void No_Left() {
     if (mousePressed && mouseX >= X && mouseX <= X+W && mouseY >= Y && mouseY <= Y+H) {
       Page_2_1_2 = false;
+      No = true;
       Page_2_1_No = true;
     }
   }
@@ -156,6 +160,7 @@ class Button_Class {
   void Yes_Right() {
     if (mousePressed && mouseX >= X && mouseX <= X+W && mouseY >= Y && mouseY <= Y+H) {
       Page_2_2_1 = false;
+      Yes = true;
       Page_2_2_Yes = true;
     }
   }
@@ -163,6 +168,7 @@ class Button_Class {
   void No_Right() {
     if (mousePressed && mouseX >= X && mouseX <= X+W && mouseY >= Y && mouseY <= Y+H) {
       Page_2_2_1 = false;
+      No = true;
       Page_2_2_No = true;
     }
   }
@@ -175,6 +181,15 @@ class Button_Class {
       Page_2_1_No = false;
       Page_2_2_No = false;
       Video3_Event = true;
+    }
+  }
+
+  void Link() {
+    if (mousePressed && mouseX >= X && mouseX <= X+W && mouseY >= Y && mouseY <= Y+H) {
+
+      // Opens link and exits program
+      link(Link);
+      exit();
     }
   }
 }
