@@ -113,29 +113,26 @@ float Text3_Size;
 
 // COLORS AND TRANSPARANCY
 // Colors
-int Color_Blue = #2C63D8; // Blue
 int Color_White = 255; // White
 int Color_Red = #E33247; // Red
 int Color_Black = 0; // Black
-int Color_Light_Gray = 200; // Light gray
-int Color_Dark_Gray = 120; // Dark gray
 // Transparecies
 int[] Transparency = {0, 126, 200, 255};
 
 // BOOLEANS
 // Page events
-boolean Page_0 = true;
+boolean Page_0 = false;
 boolean Page_1 = false;
-boolean Page_2 = false;
-boolean Page_2_Front = false;
+boolean Page_2 = true;
+boolean Page_2_Front = true;
 boolean Page_2_1 = false;
 boolean Page_2_2 = false;
 boolean Page_2_3 = false;
 // Video events and transitions
 boolean Video1_Event = false;
 boolean Video2_Event = false;
-boolean Video3_Event = false;
 boolean Scan_Fridge = false;
+boolean Video3_Event = false;
 
 void setup() {
 
@@ -307,6 +304,7 @@ void draw() {
       Page_1 = true;
     }
   }
+
   // Page_1 (open fridge)
   if (Page_1) { 
 
@@ -387,7 +385,7 @@ void draw() {
       if (!Page_2_Front) {
 
         // Clickable "BACK"-button
-        Button[1].Display_Glow();
+        Button[1].Display(Transparency[3]);
         Button[1].Text(Go_Back_Text, Text1_Size, Transparency[3]);
         Button[1].Back_To_Page_2_Front();
       }
@@ -482,4 +480,5 @@ void draw() {
       Video3_Event = false;
     }
   }
+  println(frameRate);
 }
