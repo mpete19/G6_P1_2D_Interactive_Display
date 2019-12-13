@@ -110,6 +110,10 @@ class Button_Class {
       Page_2_2_No = false;
       Yes = false;
       No = false;
+      Sound5.stop();
+      Sound6.stop();
+      Sound7.stop();
+      Sound8.stop();
 
       // Reset button locations
       Button[4].Relocate(X_Right, Y_Top1, W_Right-X_Right, H_Top1-Y_Top1);
@@ -151,8 +155,10 @@ class Button_Class {
 
   void Yes_Left() {
     if (mousePressed && mouseX >= X && mouseX <= X+W && mouseY >= Y && mouseY <= Y+H) {
+      Sound6.stop();
       Page_2_1_2 = false;
       Yes = true;
+      Sound_7 = true;
       Page_2_1_Yes = true;
     }
   }
@@ -169,8 +175,10 @@ class Button_Class {
 
   void Yes_Right() {
     if (mousePressed && mouseX >= X && mouseX <= X+W && mouseY >= Y && mouseY <= Y+H) {
+      Sound6.stop();
       Page_2_2_1 = false;
       Yes = true;
+      Sound_7 = true;
       Page_2_2_Yes = true;
     }
   }
