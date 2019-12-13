@@ -135,7 +135,6 @@ class Button_Class {
   void Yes() {
     if (mousePressed && mouseX >= X && mouseX <= X+W && mouseY >= Y && mouseY <= Y+H) {
       Page_2 = false;
-      Page_2_1 = false;
       Page_2_2 = false;
       Page_2_3 = false;
       Video3_Event = true;
