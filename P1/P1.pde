@@ -2,7 +2,7 @@ void setup() {
 
   size(540, 960);
 
-  // PICTURES, VIDEOS AND FONTS
+  // PICTURES, VIDEOS, FONTS AND SOUNDS
   // Pictures
   Fridge1 = loadImage("Vid1_Trim_Moment.jpg");
   Fridge2 = loadImage("Open Fridge.png");
@@ -14,6 +14,15 @@ void setup() {
   Video3 = new Movie(this, "Vid3.mp4");
   // Fonts
   AR_Font = createFont("Helvetica-65-Medium_22443.ttf", 24);
+  // Sound
+  Sound1 = new SoundFile(this, "lydklip1.mp3");
+  Sound2 = new SoundFile(this, "lydklip2.mp3");
+  Sound3 = new SoundFile(this, "lydklip3.mp3");
+  Sound4 = new SoundFile(this, "lydklip5.mp3");
+  Sound5 = new SoundFile(this, "lydklip6.mp3");
+  Sound6 = new SoundFile(this, "lydklip7.mp3");
+  Sound7 = new SoundFile(this, "lydklip8.mp3");
+  Sound8 = new SoundFile(this, "lydklip9.mp3");
 
   // SIZES, COORDINATS AND MOVEMENT (some coordinates was found by using the COORDINATION_TOOL)
   // Images and videos
@@ -127,6 +136,11 @@ void draw() {
   // Page_0 (closed fridge)
   if (Page_0) {
 
+    if (Page_0 && Sound_1) {
+      Sound1.play();
+      Sound_1 = false;
+    }
+
     // Fridge1 (image)
     image(Fridge1, Image_X, Image_Y, Image_W, Image_H);
 
@@ -153,6 +167,11 @@ void draw() {
   // Page_0 to Page_1 (video transition)
   // First part (video transition)
   if (Video1_Event) {
+
+    if (Video1_Event && Sound_2) {
+      Sound2.play();
+      Sound_2 = false;
+    }
 
     // Plays Video1 (video)
     Video1.play();
@@ -239,6 +258,7 @@ void draw() {
       Scan_Fridge = false;
       Page_2 = true;
       Page_2_Front = true;
+      Sound_4 = true;
     }
   }
 
@@ -252,6 +272,11 @@ void draw() {
 
       // Multiple choice buttons to go forth
       if (Page_2_Front) {
+
+        if (Page_2 && Sound_4) {
+          Sound4.play();
+          Sound_4 = false;
+        }
 
         // "FRIDGE SCANNED" sign
         Button[1].Display(Transparency[1]);
@@ -280,6 +305,11 @@ void draw() {
       // Page_2_1 if "Grocery facts"-button is clicked (Nutrition facts)
       if (Page_2_1) {
 
+        if (Page_2_1 && Sound_5) {
+          Sound5.play();
+          Sound_5 = false;
+        }
+
         // "Grocery facts" sign
         Button[3].Display(Transparency[1]);
         Button[3].Text(Grocery_Facts_Text, Text1_Size, Transparency[1]);
@@ -297,6 +327,11 @@ void draw() {
 
       // Page_2_2_1 if "Search for recipes"-button is clicked (Are you willing to go grocery shopping?)
       if (Page_2_2_1) {
+
+        if (Page_2_2_1 && Sound_6) {
+          Sound6.play();
+          Sound_6 = false;
+        }
 
         // "Search for recipes" sign
         Button[4].Display(Transparency[1]);
@@ -351,6 +386,11 @@ void draw() {
       // Page_2_2_No from Page_2_2_1
       if (Page_2_2_No) {
 
+        if (Page_2_2_No && Sound_8) {
+          Sound8.play();
+          Sound_8 = false;
+        }
+
         // "Search for recipes" sign
         Button[4].Display(Transparency[1]);
         Button[4].Text(Search_For_Recipes_Text, Text1_Size, Transparency[1]);
@@ -382,7 +422,12 @@ void draw() {
       // Page_2_1_2 after Page_2_1
       if (Page_2_1_2) {
 
-        // Clickable "Grocery facts"-button
+        if (Page_2_1_2 && Sound_6) {
+          Sound6.play();
+          Sound_6 = false;
+        }
+
+        // "Grocery facts" sign
         Button[3].Display(Transparency[1]);
         Button[3].Text(Grocery_Facts_Text, Text1_Size, Transparency[3]);
 
@@ -461,6 +506,11 @@ void draw() {
 
     // Page_2_1_No after Page_2_1_2
     if (Page_2_1_No) {
+
+      if (Page_2_1_No && Sound_8) {
+        Sound8.play();
+        Sound_8 = false;
+      }
 
       // Clickable "Grocery facts"-button
       Button[3].Display(Transparency[1]);

@@ -44,6 +44,14 @@ Movie Video3;
 // Fonts
 PFont AR_Font;
 // Sound
+SoundFile Sound1;
+SoundFile Sound2;
+SoundFile Sound3;
+SoundFile Sound4;
+SoundFile Sound5;
+SoundFile Sound6;
+SoundFile Sound7;
+SoundFile Sound8;
 
 // CLASSES
 Button_Class[] Button = new Button_Class[13];
@@ -147,10 +155,10 @@ int[] Transparency = {0, 126, 200, 255};
 
 // BOOLEANS
 // Page events
-boolean Page_0 = true;
+boolean Page_0 = false;
 boolean Page_1 = false;
-boolean Page_2 = false;
-boolean Page_2_Front = false;
+boolean Page_2 = true;
+boolean Page_2_Front = true;
 boolean Page_2_1 = false;
 boolean Page_2_1_2 = false;
 boolean Page_2_1_Yes = false;
@@ -167,3 +175,12 @@ boolean Video3_Event = false;
 // Yes or no
 boolean Yes = false;
 boolean No = false;
+// Sound
+boolean Sound_1 = false;
+boolean Sound_2 = false;
+boolean Sound_3 = false;
+boolean Sound_4 = false;
+boolean Sound_5 = false;
+boolean Sound_6 = false;
+boolean Sound_7 = false;
+boolean Sound_8 = false;

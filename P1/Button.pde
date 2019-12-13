@@ -83,8 +83,10 @@ class Button_Class {
   // AR Glasses
   void Page_1() {
     if (mousePressed && mouseX >= X && mouseX <= X+W && mouseY >= Y && mouseY <= Y+H) {
+      Sound1.stop();
       Page_0 = false;
       Video1_Event = true;
+      Sound_2 = true;
     }
   }
 
@@ -122,21 +124,27 @@ class Button_Class {
 
   void Page_2_1_1() {
     if (mousePressed && mouseX >= X && mouseX <= X+W && mouseY >= Y && mouseY <= Y+H) {
+      Sound4.stop();
       Page_2_Front = false;
+      Sound_5 = true;
       Page_2_1 = true;
     }
   } 
 
   void Page_2_2_1() {
     if (mousePressed && mouseX >= X && mouseX <= X+W && mouseY >= Y && mouseY <= Y+H) {
+      Sound5.stop();
       Page_2_Front = false;
+      Sound_6 = true;
       Page_2_2_1 = true;
     }
   }
 
   void Page_2_1_2() {
     if (mousePressed && mouseX >= X && mouseX <= X+W && mouseY >= Y && mouseY <= Y+H) {
+      Sound5.stop();
       Page_2_1 = false;
+      Sound_6 = true;
       Page_2_1_2 = true;
     }
   }
@@ -151,7 +159,9 @@ class Button_Class {
 
   void No_Left() {
     if (mousePressed && mouseX >= X && mouseX <= X+W && mouseY >= Y && mouseY <= Y+H) {
+      Sound6.stop();
       Page_2_1_2 = false;
+      Sound_8 = true;
       No = true;
       Page_2_1_No = true;
     }
@@ -167,7 +177,9 @@ class Button_Class {
 
   void No_Right() {
     if (mousePressed && mouseX >= X && mouseX <= X+W && mouseY >= Y && mouseY <= Y+H) {
+      Sound6.stop();
       Page_2_2_1 = false;
+      Sound_8 = true;
       No = true;
       Page_2_2_No = true;
     }
@@ -175,6 +187,7 @@ class Button_Class {
 
   void Choose_Meal() {
     if (mousePressed && mouseX >= X && mouseX <= X+W && mouseY >= Y && mouseY <= Y+H) {
+      Sound8.stop();
       Page_2 = false;
       Page_2_1_Yes = false;
       Page_2_2_Yes = false;
