@@ -77,10 +77,7 @@ void setup() {
   B7_X_Relocate = width/3.624161;
   // Button[11]
   B11_Y = height/2.7428572;
-  B11_H = height/2.0338984;
-  // Button[12]
-  B12_Y = height/2.0125787;
-  B12_H = height/1.8934911;
+  B11_H = height/1.8461539;
   // Arrow to AR glasses
   AR_Arrow_X = width/1.2189616;
   AR_Arrow_Y = height/2.1192052;
@@ -127,8 +124,7 @@ void setup() {
   Button[8] = new Button_Class(X_Right, Y_Top4_Right, W_Right-X_Right, H_Top4_Right-Y_Top4_Right); // Dal
   Button[9] = new Button_Class(X_Right, Y_Top5_Right, W_Right-X_Right, H_Top4_Right-Y_Top4_Right); // Egg pie
   Button[10] = new Button_Class(X_Right, Y_Top6_Right, W_Right-X_Right, H_Top4_Right-Y_Top4_Right); // Risotto
-  Button[11] = new Button_Class(X_Link, B11_Y, W_Link-X_Link, B11_H-B11_Y); // Link info
-  Button[12] = new Button_Class(X_Link, B12_Y, W_Link-X_Link, B12_H-B12_Y);
+  Button[11] = new Button_Class(X_Link, B11_Y, W_Link-X_Link, B11_H-B11_Y); // Link + info
 }
 
 void draw() {
@@ -589,12 +585,8 @@ void draw() {
     }
 
     // Link info
-    Button[11].Display(Transparency[3]);
+    Button[11].Display_Glow();
     Button[11].Text(Link_Text, Text1_Size, Transparency[3]);
-
-    // Exits program and opens youtube
-    Button[12].Display_Glow();
-    Button[12].Text(Link_Text2, Text2_Size, Transparency[3]);
-    Button[12].Link();
+    Button[11].Link();
   }
 }

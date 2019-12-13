@@ -18,8 +18,7 @@ String Risotto_Text = "Risotto (1 serving, 222 kcal)\nCreate a grocery list";
 String Pasta_Text = "Pasta bolognese (1 serving, 364 kcal)\nStart cooking!";
 String Noodle_Text = "Fried noodles (1 serving, 286 kcal)\nStart cooking!";
 String Soup_Text = "Tomato soup (1 serving, 204 kcal)\nStart cooking!";
-String Link_Text = "Here is an example of how AR can assist you when preparing a meal";
-String Link_Text2 = "Exit and open youtube";
+String Link_Text = "Here is an example of how AR can assist you when preparing a meal\nClick to Exit and open youtube";
 String Link = "https://www.youtube.com/watch?v=N2Rq0p7j5Xw";
 
 // TIME AND COUNTERS
@@ -110,9 +109,6 @@ float B7_X_Relocate;
 // Buttons[11]
 float B11_Y;
 float B11_H;
-// Button[12]
-float B12_Y;
-float B12_H;
 // Arrow to AR glasses
 float AR_Arrow_X;
 float AR_Arrow_Y;
