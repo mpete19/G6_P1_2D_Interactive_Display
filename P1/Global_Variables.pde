@@ -12,6 +12,12 @@ String Shopping_Text = "Are you willing to go grocery shopping in order to get m
 String Yes_Text = "Yes, expand my options";
 String No_Text = "No, find recipes from current inventory";
 String Go_Back_Text = "BACK";
+String Dal_Text = "Dal (1 serving, 104 kcal)\nCreate a grocery list";
+String Egg_Pie_Text = "Egg pie (1 serving, 406 kcal)\nCreate a grocery list";
+String Risotto_Text = "Risotto (1 serving, 222 kcal)\nCreate a grocery list";
+String Pasta_Text = "Pasta bolognese (1 serving, 364 kcal)\nStart cooking!";
+String Noodle_Text = "Fried noodles (1 serving, 286 kcal)\nStart cooking!";
+String Soup_Text = "Tomato soup (1 serving, 204 kcal)\nStart cooking!";
 
 // TIME AND COUNTERS
 float Video_Count;
@@ -33,7 +39,7 @@ Movie Video3;
 PFont AR_Font;
 
 // CLASSES
-Button_Class[] Button = new Button_Class[8];
+Button_Class[] Button = new Button_Class[11];
 
 // SIZES, COORDINATS AND MOVEMENT
 // Images and videos
@@ -58,7 +64,15 @@ float Y_Top3_Right;
 float H_Top3_Right;
 float Y_Top4_Left;
 float H_Top4_Left;
+float Y_Top4_Right;
+float H_Top4_Right;
 float Y_Top5_Left;
+float Y_Top5_Right;
+float Y_Top6_Left;
+float H_Top6_Left;
+float Y_Top6_Right;
+float Y_Top7_Left;
+float Y_Top8_Left;
 // Button[0]
 float B0_X;
 float B0_Y;
@@ -124,8 +138,12 @@ boolean Page_1 = false;
 boolean Page_2 = false;
 boolean Page_2_Front = false;
 boolean Page_2_1 = false;
-boolean Page_2_2 = false;
-boolean Page_2_3 = false;
+boolean Page_2_1_2 = false;
+boolean Page_2_1_Yes = false;
+boolean Page_2_1_No = false;
+boolean Page_2_2_1 = false;
+boolean Page_2_2_Yes = false;
+boolean Page_2_2_No = false;
 // Video events and transitions
 boolean Video1_Event = false;
 boolean Video2_Event = false;

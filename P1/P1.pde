@@ -5,9 +5,9 @@ void setup() {
   // PICTURES, VIDEOS AND FONTS
   // Pictures
   Fridge1 = loadImage("Vid1_Trim_Moment.jpg");
-  Fridge2 = loadImage("Vid2_Trim_Moment.jpg");
+  Fridge2 = loadImage("Open Fridge.png");
   // Videos
-  Video1 = new Movie(this, "Vid1_Trim.mp4");
+  Video1 = new Movie(this, "Vid1.mp4");
   Video2 = new Movie(this, "Vid2_Trim.mp4");
   Video3 = new Movie(this, "Vid3.mp4");
   // Fonts
@@ -36,7 +36,15 @@ void setup() {
   H_Top3_Right = height/2.0960698;
   Y_Top4_Left = height/2.1333334;
   H_Top4_Left = height/1.8079096;
+  Y_Top4_Right = height/2.064516;
+  H_Top4_Right = height/1.8677043;
   Y_Top5_Left = height/1.7843866;
+  Y_Top5_Right = height/1.849711;
+  Y_Top6_Left = height/1.4349775;
+  H_Top6_Left = height/1.3578501;
+  Y_Top6_Right = height/1.681261;
+  Y_Top7_Left = height/1.3296399;
+  Y_Top8_Left = height/1.2371134;
   // Button[0]
   B0_X = width/1.320132;
   B0_Y = height/2.0833333;
@@ -98,6 +106,9 @@ void setup() {
   Button[5] = new Button_Class(X_Right, Y_Top2, W_Right-X_Right, B5_H-Y_Top2); // Are you willing to go grocery shopping?
   Button[6] = new Button_Class(X_Right, Y_Top3_Right, B6_W-X_Right, H_Top3_Right-Y_Top3_Right); // Yes
   Button[7] = new Button_Class(B7_X, Y_Top3_Right, W_Right-B7_X, H_Top3_Right-Y_Top3_Right); // No
+  Button[8] = new Button_Class(X_Right, Y_Top4_Right, W_Right-X_Right, H_Top4_Right-Y_Top4_Right); // Dal
+  Button[9] = new Button_Class(X_Right, Y_Top5_Right, W_Right-X_Right, H_Top4_Right-Y_Top4_Right); // Egg pie
+  Button[10] = new Button_Class(X_Right, Y_Top6_Right, W_Right-X_Right, H_Top4_Right-Y_Top4_Right); // Risotto
 }
 
 void draw() {
@@ -238,12 +249,12 @@ void draw() {
         // Clickable "Grocery facts"-button
         Button[3].Display_Glow();
         Button[3].Text(Grocery_Facts_Text, Text1_Size, Transparency[3]);
-        Button[3].Page_2_1();
+        Button[3].Page_2_1_1();
 
         // Clickable "Search for recipes"-button
         Button[4].Display_Glow();
         Button[4].Text(Search_For_Recipes_Text, Text1_Size, Transparency[3]);
-        Button[4].Page_2_2();
+        Button[4].Page_2_2_1();
       }
 
       // Option to go back to Page_2_Front
@@ -270,13 +281,13 @@ void draw() {
         Button[4].Relocate(X_Left, Y_Top3_Left, W_Left-X_Left, H_Top3_Left-Y_Top3_Left);
         Button[4].Display_Glow();
         Button[4].Text(Search_For_Recipes_Text, Text2_Size, Transparency[3]);
-        Button[4].Page_2_3();
+        Button[4].Page_2_1_2();
       }
 
-      // Page_2_2 if "Search for recipes"-button is clicked (Are you willing to go grocery shopping?)
-      if (Page_2_2) {
+      // Page_2_2_1 if "Search for recipes"-button is clicked (Are you willing to go grocery shopping?)
+      if (Page_2_2_1) {
 
-        // Clickable "Search for recipes"-button
+        // "Search for recipes" sign
         Button[4].Display(Transparency[1]);
         Button[4].Text(Search_For_Recipes_Text, Text1_Size, Transparency[1]);
 
@@ -287,15 +298,78 @@ void draw() {
         // Clickable "Yes"-button
         Button[6].Display_Glow();
         Button[6].Text(Yes_Text, Text2_Size, Transparency[3]);
-        Button[6].Yes();
+        Button[6].Yes_Right();
 
         // Clickable "No"-button
         Button[7].Display_Glow();
         Button[7].Text(No_Text, Text2_Size, Transparency[3]);
+        Button[7].No_Right();
       }
 
-      // Page_2_3 after Page_2_1
-      if (Page_2_3) {
+      // Page_2_2_Yes from Page_2_2_1
+      if (Page_2_2_Yes) {
+
+        // "Search for recipes" sign
+        Button[4].Display(Transparency[1]);
+        Button[4].Text(Search_For_Recipes_Text, Text1_Size, Transparency[1]);
+
+        // "Are you willing to go grocery shopping?" sign (Not transparent)
+        Button[5].Display(Transparency[1]);
+        Button[5].Text(Shopping_Text, Text2_Size, Transparency[1]);
+
+        // "Yes" sign
+        Button[6].Display(Transparency[1]);
+        Button[6].Text(Yes_Text, Text2_Size, Transparency[1]);
+
+        // Clickable "Dal"-button
+        Button[8].Display_Glow();
+        Button[8].Text(Dal_Text, Text2_Size, Transparency[3]);
+        Button[8].Choose_Meal();
+
+        // Clickable "Egg pie"-button
+        Button[9].Display_Glow();
+        Button[9].Text(Egg_Pie_Text, Text2_Size, Transparency[3]);
+        Button[9].Choose_Meal();
+
+        // Clickable "Risotto"-button
+        Button[10].Display_Glow();
+        Button[10].Text(Risotto_Text, Text2_Size, Transparency[3]);
+        Button[10].Choose_Meal();
+      }
+
+      // Page_2_2_No from Page_2_2_1
+      if (Page_2_2_No) {
+
+        // "Search for recipes" sign
+        Button[4].Display(Transparency[1]);
+        Button[4].Text(Search_For_Recipes_Text, Text1_Size, Transparency[1]);
+
+        // "Are you willing to go grocery shopping?" sign (Not transparent)
+        Button[5].Display(Transparency[1]);
+        Button[5].Text(Shopping_Text, Text2_Size, Transparency[1]);
+
+        // "No" sign
+        Button[7].Display(Transparency[1]);
+        Button[7].Text(No_Text, Text2_Size, Transparency[1]);
+
+        // Clickable "Paste bolognese"-button
+        Button[8].Display_Glow();
+        Button[8].Text(Pasta_Text, Text2_Size, Transparency[3]);
+        Button[8].Choose_Meal();
+
+        // Clickable "Fried noodles"-button
+        Button[9].Display_Glow();
+        Button[9].Text(Noodle_Text, Text2_Size, Transparency[3]);
+        Button[9].Choose_Meal();
+
+        // Clickable "Tomato soup"-button
+        Button[10].Display_Glow();
+        Button[10].Text(Soup_Text, Text2_Size, Transparency[3]);
+        Button[10].Choose_Meal();
+      }
+
+      // Page_2_1_2 after Page_2_1
+      if (Page_2_1_2) {
 
         // Clickable "Grocery facts"-button
         Button[3].Display(Transparency[1]);
@@ -319,13 +393,104 @@ void draw() {
         Button[6].Relocate(X_Left, Y_Top5_Left, B6_W_Relocate-X_Left, H_Top3_Right-Y_Top3_Right);
         Button[6].Display_Glow();
         Button[6].Text(Yes_Text, Text2_Size, Transparency[3]);
-        Button[6].Yes();
+        Button[6].Yes_Left();
 
         // Clickable "No"-button
         Button[7].Relocate(B7_X_Relocate, Y_Top5_Left, W_Left-B7_X_Relocate, H_Top3_Right-Y_Top3_Right);
         Button[7].Display_Glow();
         Button[7].Text(No_Text, Text2_Size, Transparency[3]);
+        Button[7].No_Left();
       }
+
+      // Page_2_1_Yes after Page_2_1_2
+      if (Page_2_1_Yes) {
+
+        // "Grocery facts" sign
+        Button[3].Display(Transparency[1]);
+        Button[3].Text(Grocery_Facts_Text, Text1_Size, Transparency[3]);
+
+        // "Nutrtition facts" sign
+        Button[2].Display(Transparency[1]);
+        Button[2].Text(Nutrition_Text, Text2_Size, Transparency[1]);
+
+        // "Search for recipes" sign
+        Button[4].Relocate(X_Left, Y_Top3_Left, W_Left-X_Left, H_Top3_Left-Y_Top3_Left);
+        Button[4].Display(Transparency[1]);
+        Button[4].Text(Search_For_Recipes_Text, Text2_Size, Transparency[1]);
+
+        // "Are you willing to go grocery shopping?" sign
+        Button[5].Relocate(X_Left, Y_Top4_Left, W_Left-X_Left, H_Top4_Left-Y_Top4_Left);
+        Button[5].Display(Transparency[1]);
+        Button[5].Text(Shopping_Text, Text2_Size, Transparency[1]);
+
+        // "Yes" sign
+        Button[6].Relocate(X_Left, Y_Top5_Left, B6_W_Relocate-X_Left, H_Top3_Right-Y_Top3_Right);
+        Button[6].Display(Transparency[1]);
+        Button[6].Text(Yes_Text, Text2_Size, Transparency[1]);
+
+        // Clickable "Dal"-button
+        Button[8].Relocate(X_Left, Y_Top6_Left, W_Left-X_Left, H_Top4_Right-Y_Top4_Right);
+        Button[8].Display_Glow();
+        Button[8].Text(Dal_Text, Text2_Size, Transparency[3]);
+        Button[8].Choose_Meal();
+
+        // Clickable "Egg pie"-button
+        Button[9].Relocate(X_Left, Y_Top7_Left, W_Left-X_Left, H_Top4_Right-Y_Top4_Right);
+        Button[9].Display_Glow();
+        Button[9].Text(Egg_Pie_Text, Text2_Size, Transparency[3]);
+        Button[9].Choose_Meal();
+
+        // Clickable "Risotto"-button
+        Button[10].Relocate(X_Left, Y_Top8_Left, W_Left-X_Left, H_Top4_Right-Y_Top4_Right);
+        Button[10].Display_Glow();
+        Button[10].Text(Risotto_Text, Text2_Size, Transparency[3]);
+        Button[10].Choose_Meal();
+      }
+    }
+
+    // Page_2_1_No after Page_2_1_2
+    if (Page_2_1_No) {
+
+      // Clickable "Grocery facts"-button
+      Button[3].Display(Transparency[1]);
+      Button[3].Text(Grocery_Facts_Text, Text1_Size, Transparency[3]);
+
+      // "Nutrtition facts" sign
+      Button[2].Display(Transparency[1]);
+      Button[2].Text(Nutrition_Text, Text2_Size, Transparency[1]);
+
+      // "Search for recipes" sign
+      Button[4].Relocate(X_Left, Y_Top3_Left, W_Left-X_Left, H_Top3_Left-Y_Top3_Left);
+      Button[4].Display(Transparency[1]);
+      Button[4].Text(Search_For_Recipes_Text, Text2_Size, Transparency[1]);
+
+      // "Are you willing to go grocery shopping?" sign
+      Button[5].Relocate(X_Left, Y_Top4_Left, W_Left-X_Left, H_Top4_Left-Y_Top4_Left);
+      Button[5].Display(Transparency[1]);
+      Button[5].Text(Shopping_Text, Text2_Size, Transparency[1]);
+
+      // "No" sign
+      Button[7].Relocate(B7_X_Relocate, Y_Top5_Left, W_Left-B7_X_Relocate, H_Top3_Right-Y_Top3_Right);
+      Button[7].Display(Transparency[1]);
+      Button[7].Text(No_Text, Text2_Size, Transparency[1]);
+
+      // Clickable "Pasta Bolognese"-button
+      Button[8].Relocate(X_Left, Y_Top6_Left, W_Left-X_Left, H_Top4_Right-Y_Top4_Right);
+      Button[8].Display_Glow();
+      Button[8].Text(Pasta_Text, Text2_Size, Transparency[3]);
+      Button[8].Choose_Meal();
+
+      // Clickable "Fried noodles"-button
+      Button[9].Relocate(X_Left, Y_Top7_Left, W_Left-X_Left, H_Top4_Right-Y_Top4_Right);
+      Button[9].Display_Glow();
+      Button[9].Text(Noodle_Text, Text2_Size, Transparency[3]);
+      Button[9].Choose_Meal();
+
+      // Clickable "Tomato soup"-button
+      Button[10].Relocate(X_Left, Y_Top8_Left, W_Left-X_Left, H_Top4_Right-Y_Top4_Right);
+      Button[10].Display_Glow();
+      Button[10].Text(Soup_Text, Text2_Size, Transparency[3]);
+      Button[10].Choose_Meal();
     }
   }
 

@@ -100,43 +100,80 @@ class Button_Class {
     if (mousePressed && mouseX >= X && mouseX <= X+W && mouseY >= Y && mouseY <= Y+H) {
       Page_2_Front = true;
       Page_2_1 = false;
-      Page_2_2 = false;
-      Page_2_3 = false;
+      Page_2_1_2 = false;
+      Page_2_1_Yes = false;
+      Page_2_1_No = false;
+      Page_2_2_1 = false;
+      Page_2_2_Yes = false;
+      Page_2_2_No = false;
 
       // Reset button locations
       Button[4].Relocate(X_Right, Y_Top1, W_Right-X_Right, H_Top1-Y_Top1);
       Button[5].Relocate(X_Right, Y_Top2, W_Right-X_Right, B5_H-Y_Top2);
       Button[6].Relocate(X_Right, Y_Top3_Right, B6_W-X_Right, H_Top3_Right-Y_Top3_Right);
       Button[7].Relocate(B7_X, Y_Top3_Right, W_Right-B7_X, H_Top3_Right-Y_Top3_Right);
+      Button[8].Relocate(X_Right, Y_Top4_Right, W_Right-X_Right, H_Top4_Right-Y_Top4_Right);
+      Button[9].Relocate(X_Right, Y_Top5_Right, W_Right-X_Right, H_Top4_Right-Y_Top4_Right);
+      Button[10].Relocate(X_Right, Y_Top6_Right, W_Right-X_Right, H_Top4_Right-Y_Top4_Right);
     }
   }
 
-  void Page_2_1() {
+  void Page_2_1_1() {
     if (mousePressed && mouseX >= X && mouseX <= X+W && mouseY >= Y && mouseY <= Y+H) {
       Page_2_Front = false;
       Page_2_1 = true;
     }
   } 
 
-  void Page_2_2() {
+  void Page_2_2_1() {
     if (mousePressed && mouseX >= X && mouseX <= X+W && mouseY >= Y && mouseY <= Y+H) {
       Page_2_Front = false;
-      Page_2_2 = true;
+      Page_2_2_1 = true;
     }
   }
 
-  void Page_2_3() {
+  void Page_2_1_2() {
     if (mousePressed && mouseX >= X && mouseX <= X+W && mouseY >= Y && mouseY <= Y+H) {
       Page_2_1 = false;
-      Page_2_3 = true;
+      Page_2_1_2 = true;
     }
   }
 
-  void Yes() {
+  void Yes_Left() {
+    if (mousePressed && mouseX >= X && mouseX <= X+W && mouseY >= Y && mouseY <= Y+H) {
+      Page_2_1_2 = false;
+      Page_2_1_Yes = true;
+    }
+  }
+
+  void No_Left() {
+    if (mousePressed && mouseX >= X && mouseX <= X+W && mouseY >= Y && mouseY <= Y+H) {
+      Page_2_1_2 = false;
+      Page_2_1_No = true;
+    }
+  }
+
+  void Yes_Right() {
+    if (mousePressed && mouseX >= X && mouseX <= X+W && mouseY >= Y && mouseY <= Y+H) {
+      Page_2_2_1 = false;
+      Page_2_2_Yes = true;
+    }
+  }
+
+  void No_Right() {
+    if (mousePressed && mouseX >= X && mouseX <= X+W && mouseY >= Y && mouseY <= Y+H) {
+      Page_2_2_1 = false;
+      Page_2_2_No = true;
+    }
+  }
+
+  void Choose_Meal() {
     if (mousePressed && mouseX >= X && mouseX <= X+W && mouseY >= Y && mouseY <= Y+H) {
       Page_2 = false;
-      Page_2_2 = false;
-      Page_2_3 = false;
+      Page_2_1_Yes = false;
+      Page_2_2_Yes = false;
+      Page_2_1_No = false;
+      Page_2_2_No = false;
       Video3_Event = true;
     }
   }
