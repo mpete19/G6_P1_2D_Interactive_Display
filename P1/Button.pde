@@ -137,7 +137,7 @@ class Button_Class {
 
   void Page_2_2_1() {
     if (mousePressed && mouseX >= X && mouseX <= X+W && mouseY >= Y && mouseY <= Y+H) {
-      Sound5.stop();
+      Sound4.stop();
       Page_2_Front = false;
       Sound_6 = true;
       Page_2_2_1 = true;
