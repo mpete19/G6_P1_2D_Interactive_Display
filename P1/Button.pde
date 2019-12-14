@@ -195,6 +195,7 @@ class Button_Class {
 
   void Choose_Meal() {
     if (mousePressed && mouseX >= X && mouseX <= X+W && mouseY >= Y && mouseY <= Y+H) {
+      Sound7.stop();
       Sound8.stop();
       Page_2 = false;
       Page_2_1_Yes = false;
