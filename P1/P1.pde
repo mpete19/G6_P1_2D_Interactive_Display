@@ -31,7 +31,7 @@ void setup() {
   Image_W = width;
   Image_H = height;
   // Buttons X and W to align
-  X_Left = width/12.0;
+  X_Left = width/18.0;
   W_Left = width/2.240664;
   X_Right = width/1.849315;
   W_Right = width/1.08;
@@ -210,6 +210,8 @@ void draw() {
   // Page_1 (open fridge)
   if (Page_1) { 
 
+    Sound2.stop();
+
     // Fridge2 (image)
     image(Fridge2, Image_X, Image_Y, Image_W, Image_H);
 
@@ -220,7 +222,7 @@ void draw() {
   }
 
   // Page_1 to Page_2 (animation transition)
-  if (Scan_Fridge) {
+  if (Scan_Fridge) {    
 
     // Fridge2 (image)
     image(Fridge2, Image_X, Image_Y, Image_W, Image_H);
@@ -351,6 +353,11 @@ void draw() {
       // Page_2_2_Yes from Page_2_2_1
       if (Page_2_2_Yes) {
 
+        if (Page_2_2_Yes && Sound_7) {
+          Sound7.play();
+          Sound_7 = false;
+        }
+
         // "Search for recipes" sign
         Button[4].Display(Transparency[1]);
         Button[4].Text(Search_For_Recipes_Text, Text1_Size, Transparency[1]);
@@ -456,6 +463,11 @@ void draw() {
 
       // Page_2_1_Yes after Page_2_1_2
       if (Page_2_1_Yes) {
+
+        if (Page_2_1_Yes && Sound_7) {
+          Sound7.play();
+          Sound_7 = false;
+        }
 
         // "Grocery facts" sign
         Button[3].Display(Transparency[1]);

@@ -7,7 +7,7 @@ String Percentage_Symbol_Text = "%";
 String Fridge_Scanned_Text = "FRIDGE\nSCANNED";
 String Grocery_Facts_Text = "Grocery facts";
 String Search_For_Recipes_Text = "Search for recipes";
-String Nutrition_Text = "Apple - 72 kcal (138g)\nSausage - 189 kcal (64g)\nCarrots - 46 kcal (113g)\nPotatoes - 51 kcal (100g)\nMushroom  - 26 kcal (100g)";
+String Nutrition_Text = "Apple - 72 kcal (138g)\nSausage - 189 kcal (64g)\nPotatoes - 51 kcal (100g)\nMushroom  - 26 kcal (100g)";
 String Shopping_Text = "Are you willing to go grocery shopping in order to get more recipes?";
 String Yes_Text = "Yes, expand my options";
 String No_Text = "No, find recipes from current inventory";
@@ -15,10 +15,10 @@ String Go_Back_Text = "BACK";
 String Dal_Text = "Dal (1 serving, 104 kcal)\nCreate a grocery list";
 String Egg_Pie_Text = "Egg pie (1 serving, 406 kcal)\nCreate a grocery list";
 String Risotto_Text = "Risotto (1 serving, 222 kcal)\nCreate a grocery list";
-String Pasta_Text = "Pasta bolognese (1 serving, 364 kcal)\nStart cooking!";
-String Noodle_Text = "Fried noodles (1 serving, 286 kcal)\nStart cooking!";
-String Soup_Text = "Tomato soup (1 serving, 204 kcal)\nStart cooking!";
-String Link_Text = "Here is an example of how AR can assist you when preparing a meal\nClick to Exit and open youtube";
+String Pasta_Text = "Pasta (1 serving, 364 kcal)\nStart cooking";
+String Noodle_Text = "Fried noodles (1 serving, 286 kcal)\nStart cooking";
+String Soup_Text = "Tomato soup (1 serving, 204 kcal)\nStart cooking";
+String Link_Text = "Here is an example of how AR can assist you when preparing a meal\nClick to Exit and open Youtube";
 String Link = "https://www.youtube.com/watch?v=N2Rq0p7j5Xw";
 
 // TIME AND COUNTERS
